@@ -105,9 +105,30 @@ void setMovingPattern() {
   delay(500);
   moving = abs(moving-1)
 }
-void setBlue() {
+void setRainbow() {
   for(int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, pixels.Color(150,0,0));
+    int r = i % 42;
+    if (r >= 0 && r < 6){
+        pixels.setPixelColor(i, pixels.Color(17,255,0));
+    }
+    if (r >= 6 && r < 12){
+        pixels.setPixelColor(i, pixels.Color(17,255,136));
+    }
+    if (r >= 12 && r < 18){
+        pixels.setPixelColor(i, pixels.Color(0,250,215));
+    }
+    if (r >= 18 && r < 24){
+        pixels.setPixelColor(i, pixels.Color(15,8,200));
+    }
+    if (r >= 24 && r < 30){
+        pixels.setPixelColor(i, pixels.Color(192,8,40));
+    }
+    if (r >= 30 && r < 36){
+        pixels.setPixelColor(i, pixels.Color(225,184,4));
+    }
+    if (r >= 36 && r < 42){
+        pixels.setPixelColor(i, pixels.Color(225,254,57));
+    }
   }
 }
 void setYellow() {
