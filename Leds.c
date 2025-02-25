@@ -29,13 +29,13 @@ void loop() {
   if (mode != check) {
     switch(mode) {
       case 1:
-        setRed();
+        setPattern();
       break;
       case 2:
-        setGreen();
+        setMovingPattern();
       break;
       case 3:
-        setBlue();
+        setRainbow();
       break;
       case 4:
         setYellow();
