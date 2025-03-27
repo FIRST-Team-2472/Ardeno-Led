@@ -2,11 +2,12 @@
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
-#define PIN 7
-#define NUMPIXELS 16
-#define BRIGHTNESS 255
+#define BRIGHTNESS 150
+#define NUMPIXELS 9
+#define NUMPIXELS2 20
 
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(NUMPIXELS, 7, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pixels2(NUMPIXELS2, 6, NEO_RGB + NEO_KHZ800);
 #define DELAYVAL 50
 
 void setup() {
@@ -21,6 +22,10 @@ void setup() {
   pixels.clear();
   pixels.setBrightness(BRIGHTNESS);
   pixels.begin();
+
+  pixels2.clear();
+  pixels2.setBrightness(BRIGHTNESS);
+  pixels2.begin();
 }
 int check = -1;
 void loop() {
@@ -46,12 +51,16 @@ void loop() {
       case 6:
         setCyan();
       break;
+      case 7:
+        setOff();
       default:
-        pixels.clear();
+        setCenturion();
+
     }
     check = mode;
   }
   pixels.show();
+  pixels2.show();
 }
 
 int read () {
@@ -72,33 +81,77 @@ int pinVal(int pin) {
   }
 }
 //the color combo is BRG not RGB for some reason
+void setOff() {
+  for(int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0,0,0));
+  }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(0,0,0));
+  }
+}
 void setRed() {
   for(int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(0,150,0));
+  }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(0,150,0));
   }
 }
 void setGreen() {
   for(int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(0,0,150));
   }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(0,0,150));
+  }
 }
 void setBlue() {
   for(int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(150,0,0));
   }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(150,0,0));
+  }
 }
 void setYellow() {
   for(int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, pixels.Color(0,150,150));
+    pixels.setPixelColor(i, pixels.Color(0,250,90));
+  }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(0,250,90));
   }
 }
 void setPurple() {
   for(int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(150,150,0));
   }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(150,150,0));
+  }
 }
 void setCyan() {
   for(int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(150,0,150));
   }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    pixels2.setPixelColor(i, pixels2.Color(150,0,150));
+  }
 }
+
+void setCenturion() {
+  for(int i = 0; i < NUMPIXELS; i++) {
+    if (i % 2 == 0) {
+      pixels.setPixelColor(i, pixels.Color(0,250,90));
+    } else {
+      pixels.setPixelColor(i, pixels.Color(0,255,0));
+    }
+  }
+  for(int i = 0; i < NUMPIXELS2; i++) {
+    if (i % 2 == 0) {
+      pixels2.setPixelColor(i, pixels2.Color(0,250,90));
+    } else {
+      pixels2.setPixelColor(i, pixels2.Color(0,255,0));
+    }
+  }
+}
+
